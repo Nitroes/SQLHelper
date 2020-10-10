@@ -1,12 +1,10 @@
 package com.alicetool.project.sql;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -14,8 +12,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class SQLHelper {
-
-    SQLiteDatabase database;
+    //https://jitpack.io/#Nitroes/SQLHelper
+    public SQLiteDatabase database;
 
     public SQLHelper(SQLiteDatabase db){
         database=db;
