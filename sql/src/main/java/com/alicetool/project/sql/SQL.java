@@ -12,15 +12,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class SQLHelper {
+public class SQL {
     //https://jitpack.io/#Nitroes/SQLHelper
-    public SQLiteDatabase database;
 
-    public SQLHelper(SQLiteOpenHelper sqLiteOpenHelper){
-        database= sqLiteOpenHelper.getWritableDatabase();
-    }
-
-    public void insert(String TABLE_NAME,JSONObject json) throws Exception {
+    public static void insert(SQLiteDatabase database,String TABLE_NAME,JSONObject json) throws Exception {
         /*
             {"Name":"abc","Password":"123"}
         */
@@ -32,7 +27,7 @@ public class SQLHelper {
         database.insert(TABLE_NAME,null,values);
     }
 
-    public void updata(String TABLE_NAME,JSONObject json) throws Exception {
+    public static void updata(SQLiteDatabase database,String TABLE_NAME,JSONObject json) throws Exception {
         /*
             {"before":{"Name","abc"},"after":{"Name","cba"}}
         */
@@ -50,7 +45,7 @@ public class SQLHelper {
         }
     }
 
-    public void delete(String TABLE_NAME,JSONObject json) throws Exception {
+    public static void delete(SQLiteDatabase database,String TABLE_NAME,JSONObject json) throws Exception {
         /*
             {"Name":"abc"}
         */
@@ -60,7 +55,7 @@ public class SQLHelper {
         }
     }
 
-    public void createTable(String TABLE_NAME, JSONObject json) throws Exception {
+    public static void createTable(SQLiteDatabase database,String TABLE_NAME, JSONObject json) throws Exception {
         String str = "";
         /*
             {"Name","text";"Password":"text"}
@@ -73,7 +68,7 @@ public class SQLHelper {
         database.execSQL("CREATE TABLE " + TABLE_NAME + " ("+ str +");");
     }
 
-    public JSONArray select(String TABLE_NAME, String[] columns) throws Exception {
+    public static JSONArray select(SQLiteDatabase database,String TABLE_NAME, String[] columns) throws Exception {
         JSONArray jsonArray=new JSONArray();
         Cursor cursor = database.query(TABLE_NAME, columns, null, null, null, null, null);
         String textview_data = "";
@@ -88,7 +83,7 @@ public class SQLHelper {
         return jsonArray;
     }
 
-    public String[] getJsonKey(JSONObject json){
+    public static String[] getJsonKey(JSONObject json){
         List<String> array=new ArrayList<>();
         Iterator<String> it=json.keys();
         while(it.hasNext()){// 获得key
