@@ -3,6 +3,7 @@ package com.alicetool.project.sql;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,8 +16,8 @@ public class SQLHelper {
     //https://jitpack.io/#Nitroes/SQLHelper
     public SQLiteDatabase database;
 
-    public SQLHelper(SQLiteDatabase db){
-        database=db;
+    public SQLHelper(SQLiteOpenHelper sqLiteOpenHelper){
+        database= sqLiteOpenHelper.getWritableDatabase();
     }
 
     public void insert(String TABLE_NAME,JSONObject json) throws Exception {
